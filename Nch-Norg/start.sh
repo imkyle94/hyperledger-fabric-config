@@ -187,6 +187,9 @@ function approve() {
     verifyResult $res "Query installed on peer0.org1 has failed"
     echo "Query installed successful on peer0.org1 on channel"
 
+    echo kyle
+    echo ${PACKAGE_ID}
+
     set -x
     ${BIN_DIR}/peer lifecycle chaincode approveformyorg -o localhost:9050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA --channelID ${CHANNEL_NAME} --name ${CHAINCODE_NAME} --version ${CHAINCODE_VERSION} --package-id ${PACKAGE_ID} --sequence ${CHAINCODE_SEQUENCE} ${CHAINCODE_INIT_REQUIRED} ${CHAINCODE_END_POLICY} ${CHAINCODE_COLL_CONFIG} >&${LOG_DIR}/${ORG}-${CHANNEL_NAME}-chaincode.log
     res=$?
@@ -385,66 +388,66 @@ function main() {
     mkdir -p log
     mkdir -p packages
 
-    registerEnroll mychannel-a
+    registerEnroll mychannel-all
     echo "finished to registerEnroll(create org1, org2, orderer)"
     sleep 1
     createGenesisBlock Org1Org2Org3OrdererGenesis
     echo "finished to create genesis block"
     sleep 1
-    createGenesisBlock Org1Org2OrdererGenesis
-    echo "finished to create genesis block"
-    sleep 1
-    createGenesisBlock Org1Org3OrdererGenesis
-    echo "finished to create genesis block"
-    sleep 1
+    # createGenesisBlock Org1Org2OrdererGenesis
+    # echo "finished to create genesis block"
+    # sleep 1
+    # createGenesisBlock Org1Org3OrdererGenesis
+    # echo "finished to create genesis block"
+    # sleep 1
     createChannelTx mychannel-all Org1Org2Org3Channel
     echo "finished to create channel tx"
     sleep 1
-    createChannelTx mychannel-a Org1Org2Channel
-    echo "finished to create channel tx"
-    sleep 1
-    createChannelTx mychannel-b Org1Org3Channel
-    echo "finished to create channel tx"
-    sleep 1
+    # createChannelTx mychannel-a Org1Org2Channel
+    # echo "finished to create channel tx"
+    # sleep 1
+    # createChannelTx mychannel-b Org1Org3Channel
+    # echo "finished to create channel tx"
+    # sleep 1
     startNode
     echo "waiting for starting orderer, peer node completely"
     sleep 5
-    # createChannel mychannel-all org1
-    # echo "finished to create channel(org1이 생성)"
-    # sleep 1
-    createChannel mychannel-a org1
+    createChannel mychannel-all org1
     echo "finished to create channel(org1이 생성)"
     sleep 1
+    # createChannel mychannel-a org1
+    # echo "finished to create channel(org1이 생성)"
+    # sleep 1
     # createChannel mychannel-b org1
     # echo "finished to create channel(org1이 생성)"
     # sleep 1
-    # joinChannel mychannel-all org1
-    # echo "finished to join channel org1"
-    # sleep 1
-    # joinChannel mychannel-all org2
-    # echo "finished to join channel org2"
-    # sleep 1
-    # joinChannel mychannel-all org3
-    # echo "finished to join channel org3"
-    # sleep 1
-    joinChannel mychannel-a org1
+    joinChannel mychannel-all org1
     echo "finished to join channel org1"
     sleep 1
-    joinChannel mychannel-a org2
+    joinChannel mychannel-all org2
     echo "finished to join channel org2"
     sleep 1
+    joinChannel mychannel-all org3
+    echo "finished to join channel org3"
+    sleep 1
+    # joinChannel mychannel-a org1
+    # echo "finished to join channel org1"
+    # sleep 1
+    # joinChannel mychannel-a org2
+    # echo "finished to join channel org2"
+    # sleep 1
     # joinChannel mychannel-b org1
     # echo "finished to join channel org1"
     # sleep 1
     # joinChannel mychannel-b org3
     # echo "finished to join channel org3"
     # sleep 1
-    # setAnchorPeer mychannel-all org1
-    # echo "finished to set anchor peer org1"
-    # sleep 1
-    setAnchorPeer mychannel-a org2
-    echo "finished to set anchor peer org2"
+    setAnchorPeer mychannel-all org1
+    echo "finished to set anchor peer org1"
     sleep 1
+    # setAnchorPeer mychannel-a org2
+    # echo "finished to set anchor peer org2"
+    # sleep 1
     # setAnchorPeer mychannel-b org3
     # echo "finished to set anchor peer org3"
     # sleep 1
@@ -466,12 +469,15 @@ function main() {
     # deployChaincode --cc EthSwap --ch mychannel-a --i org1 --i org2 --ap org1 --ap org2 --check org1 --check org2 --c org1
     # echo "finished to deploy chaincode"
     # sleep 5
-    deployChaincode --cc Dev --ch mychannel-a --i org1 --i org2 --ap org1 --ap org2 --check org1 --check org2 --c org1
-    echo "finished to deploy chaincode"
-    sleep 5
+    # deployChaincode --cc Dev --ch mychannel-a --i org1 --i org2 --ap org1 --ap org2 --check org1 --check org2 --c org1
+    # echo "finished to deploy chaincode"
+    # sleep 5
     # deployChaincode --cc Dev --ch mychannel-b --ap org1 --ap org3 --check org1 --check org3 --c org3
     # echo "finished to deploy chaincode"
     # sleep 5
+    deployChaincode --cc T --ch mychannel-all --i org1 --i org2 --i org3 --ap org1 --ap org2 --ap org3 --check org1 --check org2 --check org3 --c org1
+    echo "finished to deploy chaincode"
+    sleep 5
 
     runBlockExplorer
 }

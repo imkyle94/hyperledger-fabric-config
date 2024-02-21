@@ -8,6 +8,7 @@ function createOrg1() {
   export FABRIC_CA_CLIENT_HOME=${TEST_NETWORK_HOME}/organizations/peerOrganizations/org1.example.com/
 
   Org1_address="fabric-ca/org1/tls-cert.pem"
+  # Org1_address="fabric-ca/org1/ca-cert.pem"
 
   set -x
   ${CA_BIN_DIR}/fabric-ca-client enroll -u https://admin:adminpw@localhost:7054 --caname ca-org1 --tls.certfiles ${TEST_NETWORK_HOME}/organizations/${Org1_address}
@@ -116,6 +117,7 @@ function createOrg2() {
   export FABRIC_CA_CLIENT_HOME=${TEST_NETWORK_HOME}/organizations/peerOrganizations/org2.example.com/
 
   Org2_address="fabric-ca/org2/tls-cert.pem"
+  # Org2_address="fabric-ca/org2/ca-cert.pem"
 
   set -x
   ${CA_BIN_DIR}/fabric-ca-client enroll -u https://admin:adminpw@localhost:8054 --caname ca-org2 --tls.certfiles ${TEST_NETWORK_HOME}/organizations/${Org2_address}
@@ -223,6 +225,7 @@ function createOrg3() {
   export FABRIC_CA_CLIENT_HOME=${TEST_NETWORK_HOME}/organizations/peerOrganizations/org3.example.com/
 
   Org3_address="fabric-ca/org3/tls-cert.pem"
+  # Org3_address="fabric-ca/org3/ca-cert.pem"
 
   set -x
   ${CA_BIN_DIR}/fabric-ca-client enroll -u https://admin:adminpw@localhost:6054 --caname ca-org3 --tls.certfiles ${TEST_NETWORK_HOME}/organizations/${Org3_address}
@@ -330,6 +333,7 @@ function createOrderer() {
   export FABRIC_CA_CLIENT_HOME=${TEST_NETWORK_HOME}/organizations/ordererOrganizations/example.com
 
   Orderer_address="fabric-ca/ordererOrg/tls-cert.pem"
+  # Orderer_address="fabric-ca/ordererOrg/ca-cert.pem"
 
   set -x
   ${CA_BIN_DIR}/fabric-ca-client enroll -u https://admin:adminpw@localhost:9054 --caname ca-orderer --tls.certfiles ${TEST_NETWORK_HOME}/organizations/${Orderer_address}

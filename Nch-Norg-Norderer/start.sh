@@ -334,7 +334,7 @@ function runBlockExplorer() {
 }
 
 function org1() {
-    export FABRIC_CFG_PATH=${TEST_NETWORK_HOME}/config/org1
+    export FABRIC_CFG_PATH=${TEST_NETWORK_HOME}/config
     export HOST="peer0.org1.example.com"
     export PORT=7050
     export ORG="Org1"
@@ -352,7 +352,7 @@ function org1() {
 }
 
 function org2() {
-    export FABRIC_CFG_PATH=${TEST_NETWORK_HOME}/config/org2
+    export FABRIC_CFG_PATH=${TEST_NETWORK_HOME}/config
     export HOST="peer0.org2.example.com"
     export PORT=8050
     export ORG="Org2"
@@ -370,7 +370,7 @@ function org2() {
 }
 
 function org3() {
-    export FABRIC_CFG_PATH=${TEST_NETWORK_HOME}/config/org3
+    export FABRIC_CFG_PATH=${TEST_NETWORK_HOME}/config
     export HOST="peer0.org3.example.com"
     export PORT=6050
     export ORG="Org3"
